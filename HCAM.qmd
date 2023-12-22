@@ -55,9 +55,12 @@ def label_func(f):
 
 ## Row {.tabset}
 
-
+```{python}
 #| title: Original pets Results of other Methods
+```
 ![Original pets Results of other Methods](original_other_plot.pdf)
 
+```{python}
 #| title: Randombox pets Results of other Methods
+```
 ![Randombox pets Results of other Methods](randombox_other_plot.pdf)
