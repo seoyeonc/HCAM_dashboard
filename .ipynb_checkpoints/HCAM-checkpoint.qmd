@@ -53,12 +53,16 @@ def label_func(f):
 
 # Other Methods
 
-## Row {.tabset}
+## Column {.tabset}
 
-## Original pets Results of other Methods
+```{python}
+#| title: Original pets Results of other Methods
+```
 
 ![](original_other_plot.pdf){width=100%}
 
-## Randombox pets Results of other Methods
+```{python}
+#| title: Randombox pets Results of other Methods
+```
 
 ![](randombox_other_plot.pdf){width=100%}
