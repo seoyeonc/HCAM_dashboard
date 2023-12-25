@@ -51,7 +51,7 @@ def label_func(f):
 ```
 
 
-# Other Methods
+# Other Methods {orientation="columns" scrolling="true"}
 
 ## Column {.tabset}
 
