@@ -412,8 +412,12 @@ cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=Non
 
 import matplotlib.pyplot as plt
 
+path_r=Path('random_pet_one')   #랜덤박스넣은사진
+files_r=get_image_files(path_r)
+dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
+
 fig, (ax1) = plt.subplots(1,1) 
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
 ax1.set_title("ORIGINAL")
 fig.set_figwidth(4)            
 fig.set_figheight(4)
@@ -452,8 +456,13 @@ fig.tight_layout()
 
 import matplotlib.pyplot as plt
 
+path_r=Path('random_pet_one')   #랜덤박스넣은사진
+files_r=get_image_files(path_r)
+dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
+
+
 fig, (ax1) = plt.subplots(1,1) 
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
 ax1.set_title("ORIGINAL")
 fig.set_figwidth(4)            
 fig.set_figheight(4)
@@ -496,6 +505,10 @@ fig.tight_layout()
 
 import matplotlib.pyplot as plt
 
+path_r=Path('random_pet_one')   #랜덤박스넣은사진
+files_r=get_image_files(path_r)
+dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
+
 # Figure_Randombox
 fig, ((ax1,ax2,ax3,ax4),
       (ax5,ax6,ax7,ax8),
@@ -504,83 +517,83 @@ fig, ((ax1,ax2,ax3,ax4),
      (ax17,ax18,ax19,ax20)) = plt.subplots(5,4) 
 plt.title('Randombox')
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
 ax1.imshow(cam_cat_gradcam_randombox.squeeze(), alpha=0.7)
 ax1.set_title("GradCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax2)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax2)
 ax2.imshow(cam_dog_gradcam_randombox.squeeze(), alpha=0.7)
 ax2.set_title("GradCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax3)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax3)
 ax3.imshow(cam_cat_hirescam_randombox.squeeze(), alpha=0.7)
 ax3.set_title("HiResCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax4)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax4)
 ax4.imshow(cam_dog_hirescam_randombox.squeeze(), alpha=0.7)
 ax4.set_title("HiResCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax5)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax5)
 ax5.imshow(cam_cat_scorecam_randombox.squeeze(), alpha=0.7)
 ax5.set_title("ScoreCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax6)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax6)
 ax6.imshow(cam_dog_scorecam_randombox.squeeze(), alpha=0.7)
 ax6.set_title("ScoreCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax7)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax7)
 ax7.imshow(cam_cat_gradcamplusplus_randombox.squeeze(), alpha=0.7)
 ax7.set_title("GradCAMPlusPlus CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax8)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax8)
 ax8.imshow(cam_dog_gradcamplusplus_randombox.squeeze(), alpha=0.7)
 ax8.set_title("GradCAMPlusPlus DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax9)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax9)
 ax9.imshow(cam_cat_ablationcam_randombox.squeeze(), alpha=0.7)
 ax9.set_title("AblationCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax10)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax10)
 ax10.imshow(cam_dog_ablationcam_randombox.squeeze(), alpha=0.7)
 ax10.set_title("AblationCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax11)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax11)
 ax11.imshow(cam_cat_xgradcam_randombox.squeeze(), alpha=0.7)
 ax11.set_title("XGradCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax12)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax12)
 ax12.imshow(cam_dog_xgradcam_randombox.squeeze(), alpha=0.7)
 ax12.set_title("XGradCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax13)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax13)
 ax13.imshow(cam_cat_eigencam_randombox.squeeze(), alpha=0.7)
 ax13.set_title("EigenCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax14)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax14)
 ax14.imshow(cam_dog_eigencam_randombox.squeeze(), alpha=0.7)
 ax14.set_title("EigenCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax15)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax15)
 ax15.imshow(cam_cat_fullgrad_randombox.squeeze(), alpha=0.7)
 ax15.set_title("FullGrad CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax16)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax16)
 ax16.imshow(cam_dog_fullgrad_randombox.squeeze(), alpha=0.7)
 ax16.set_title("FullGrad DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax17)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax17)
 ax17.imshow(cam_cat_eigengradcam_randombox.squeeze(), alpha=0.7)
 ax17.set_title("EigenGradCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax18)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax18)
 ax18.imshow(cam_dog_eigengradcam_randombox.squeeze(), alpha=0.7)
 ax18.set_title("EigenGradCAM DOG PART")
 #
-dls.train.decode((x_cat_r,))[0].squeeze().show(ax=ax19)
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax19)
 ax19.imshow(cam_cat_layercam_randombox.squeeze(), alpha=0.7)
 ax19.set_title("LayerCAM CAT PART")
 #
-dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax20)
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax20)
 ax20.imshow(cam_dog_layercam_randombox.squeeze(), alpha=0.7)
 ax20.set_title("LayerCAM DOG PART")
 #
