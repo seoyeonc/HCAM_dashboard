@@ -3,6 +3,7 @@ title: "Analysis Result of HCAM"
 author: "SEOYEON CHOI"
 format:
     dashboard:
+     theme: default
      nav-buttons:
       - icon: github
         href: https://github.com/seoyeonc
@@ -579,4 +580,24 @@ fig.set_figwidth(20)
 fig.set_figheight(20)
 fig.tight_layout()
 
+```
+
+# dd
+
+```{python}
+
+import pickle
+
+with open('fig_original_plt.pkl', 'rb') as file:
+    fig_original_plt = pickle.load(file)
+fig_original_plt.show()
+```
+
+```{python}
+
+import pickle
+
+with open('fig_randombox_plt.pkl', 'rb') as file:
+    fig_randombox_plt = pickle.load(file)
+fig_randombox_plt.show()
 ```
