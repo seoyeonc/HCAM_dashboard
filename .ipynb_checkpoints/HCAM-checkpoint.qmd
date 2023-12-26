@@ -404,9 +404,10 @@ cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=Non
 
 
 
-# Figure of HCAM {orientation="columns" scrolling="true"}
+# Figure of HCAM
 
-## Column {width=50%}
+## Row {.tabset}
+
 
 ```{python}
 #| title: a Randombox Cat of HCAM
