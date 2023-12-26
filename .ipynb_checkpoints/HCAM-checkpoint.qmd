@@ -422,6 +422,11 @@ path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
 
+x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
+x_cat_r = x_cat_r.to('cpu')
+x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
+x_dog_r = x_dog_r.to('cpu')
+
 fig, (ax1) = plt.subplots(1,1) 
 dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
 ax1.set_title("ORIGINAL")
@@ -472,6 +477,10 @@ path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
 
+x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
+x_cat_r = x_cat_r.to('cpu')
+x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
+x_dog_r = x_dog_r.to('cpu')
 
 fig, (ax1) = plt.subplots(1,1) 
 dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
@@ -527,7 +536,10 @@ path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
 
-
+x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
+x_cat_r = x_cat_r.to('cpu')
+x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
+x_dog_r = x_dog_r.to('cpu')
 
 
 # Figure_Randombox
