@@ -86,8 +86,8 @@ x_dog_r = x_dog_r.to('cpu')
 ```{python}
 #| output: false
 # Cat
-x, = first(dls.test_dl([PILImage.create(get_image_files(path)[2])]))
-camimg = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x).squeeze())
+x_cat_r, = first(dls.test_dl([PILImage.create(get_image_files(path)[2])]))
+camimg = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_cat_r,).squeeze())
 ebayesthresh = importr('EbayesThresh').ebayesthresh
 
 power_threshed=np.array(ebayesthresh(FloatVector(torch.tensor(camimg[0].detach().reshape(-1))**2)))
@@ -105,11 +105,11 @@ A2 = 1 - A1
 
 X1=np.array(A1.to("cpu").detach(),dtype=np.float32)
 Y1=torch.Tensor(cv2.resize(X1,(512,512),interpolation=cv2.INTER_LINEAR))
-x1=x.squeeze().to('cpu')*Y1-torch.min(x.squeeze().to('cpu'))*Y1
+x1=x_cat_r,.squeeze().to('cpu')*Y1-torch.min(x_cat_r,.squeeze().to('cpu'))*Y1
 
 X12=np.array(A2.to("cpu").detach(),dtype=np.float32)
 Y12=torch.Tensor(cv2.resize(X12,(512,512),interpolation=cv2.INTER_LINEAR))
-x12=x.squeeze().to('cpu')*Y12-torch.min(x.squeeze().to('cpu'))*Y12
+x12=x_cat_r,.squeeze().to('cpu')*Y12-torch.min(x_cat_r,.squeeze().to('cpu'))*Y12
 
 x1 = x1.reshape(1,3,512,512)
 net1.to('cpu')
@@ -165,8 +165,8 @@ x32=x2*Y32-torch.min(x2*Y32)
 ```{python}
 #| output: false
 # Dog
-x, = first(dls.test_dl([PILImage.create(get_image_files(path)[12])]))
-camimg = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x).squeeze())
+x_dog_r, = first(dls.test_dl([PILImage.create(get_image_files(path)[12])]))
+camimg = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_dog_r).squeeze())
 ebayesthresh = importr('EbayesThresh').ebayesthresh
 
 power_threshed=np.array(ebayesthresh(FloatVector(torch.tensor(camimg[0].detach().reshape(-1))**2)))
@@ -183,11 +183,11 @@ A2 = 1 - A1
 
 X1=np.array(A1.to("cpu").detach(),dtype=np.float32)
 Y1=torch.Tensor(cv2.resize(X1,(512,512),interpolation=cv2.INTER_LINEAR))
-x1=x.squeeze().to('cpu')*Y1-torch.min(x.squeeze().to('cpu'))*Y1
+x1=x_dog_r.squeeze().to('cpu')*Y1-torch.min(x_dog_r.squeeze().to('cpu'))*Y1
 
 X12=np.array(A2.to("cpu").detach(),dtype=np.float32)
 Y12=torch.Tensor(cv2.resize(X12,(512,512),interpolation=cv2.INTER_LINEAR))
-x12=x.squeeze().to('cpu')*Y12-torch.min(x.squeeze().to('cpu'))*Y12
+x12=x_dog_r.squeeze().to('cpu')*Y12-torch.min(x_dog_r.squeeze().to('cpu'))*Y12
 
 x1 = x1.reshape(1,3,512,512)
 net1.to('cpu')
@@ -240,6 +240,94 @@ Y32=torch.Tensor(cv2.resize(X32,(512,512),interpolation=cv2.INTER_LINEAR))
 x32=x2*Y32-torch.min(x2*Y32)
 
 ```
+
+
+
+# Figure of HCAM
+
+## Row {.tabset}
+
+
+```{python}
+#| title: a Randombox Cat of HCAM
+fig, (ax1) = plt.subplots(1,1) 
+dls.train.decode((x,))[0].squeeze().show(ax=ax1)
+ax1.set_title("ORIGINAL")
+fig.set_figwidth(4)            
+fig.set_figheight(4)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x12*0.3).squeeze().show(ax=ax1)  #MODE1
+(x1*0.2).squeeze().show(ax=ax2)  #MODE1_res
+ax1.set_title("MODE1")
+ax2.set_title("MODE1 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x22*0.5).squeeze().show(ax=ax1)  #MODE2
+(x2*0.2).squeeze().show(ax=ax2)  #MODE2_res
+ax1.set_title("MODE2")
+ax2.set_title("MODE2 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x32*0.8).squeeze().show(ax=ax1)  #MODE3
+(x3*0.2).squeeze().show(ax=ax2)  #MODE3_res
+ax1.set_title("MODE3")
+ax2.set_title("MODE3 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+```
+
+```{python}
+#| title: a Randombox Dog of HCAM
+
+fig, (ax1) = plt.subplots(1,1) 
+dls.train.decode((x,))[0].squeeze().show(ax=ax1)
+ax1.set_title("ORIGINAL")
+fig.set_figwidth(4)            
+fig.set_figheight(4)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x12*0.3).squeeze().show(ax=ax1)  #MODE1
+(x1*0.2).squeeze().show(ax=ax2)  #MODE1_res
+ax1.set_title("MODE1")
+ax2.set_title("MODE1 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x22*4).squeeze().show(ax=ax1)  #MODE2
+(x2).squeeze().show(ax=ax2)  #MODE2_res
+ax1.set_title("MODE2")
+ax2.set_title("MODE2 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x32*8).squeeze().show(ax=ax1)  #MODE3
+(x3).squeeze().show(ax=ax2)  #MODE3_res
+ax1.set_title("MODE3")
+ax2.set_title("MODE3 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+
+```
+
+
+# Other Methods {orientation="columns" scrolling="true"}
+
+## Column {.tabset}
 
 
 ```{python}
@@ -415,91 +503,6 @@ cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=Non
 
 ```
 
-# Figure of HCAM
-
-## Row {.tabset}
-
-
-```{python}
-#| title: a Randombox Cat of HCAM
-fig, (ax1) = plt.subplots(1,1) 
-dls.train.decode((x,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x22*0.5).squeeze().show(ax=ax1)  #MODE2
-(x2*0.2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x32*0.8).squeeze().show(ax=ax1)  #MODE3
-(x3*0.2).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-```
-
-```{python}
-#| title: a Randombox Dog of HCAM
-
-fig, (ax1) = plt.subplots(1,1) 
-dls.train.decode((x,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x22*4).squeeze().show(ax=ax1)  #MODE2
-(x2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x32*8).squeeze().show(ax=ax1)  #MODE3
-(x3).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-
-```
-
-
-# Other Methods {orientation="columns" scrolling="true"}
-
-## Column {.tabset}
 
 ```{python}
 #| title: Original pets Results of other Methods
