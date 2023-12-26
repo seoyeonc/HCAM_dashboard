@@ -411,6 +411,7 @@ cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=Non
 #| title: a Randombox Cat of HCAM
 
 import matplotlib.pyplot as plt
+from fastai.vision.all import *
 
 path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
@@ -455,6 +456,7 @@ fig.tight_layout()
 #| title: a Randombox Dog of HCAM
 
 import matplotlib.pyplot as plt
+from fastai.vision.all import *
 
 path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
@@ -504,6 +506,7 @@ fig.tight_layout()
 #| title: Randombox pets Results of other Methods
 
 import matplotlib.pyplot as plt
+from fastai.vision.all import *
 
 path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
