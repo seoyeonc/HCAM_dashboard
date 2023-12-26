@@ -331,7 +331,7 @@ fig_original_plt.show()
 
 import pickle
 
-with open('fig_randombox_plt.pkl', 'rb') as file:
-    fig_randombox_plt = pickle.load(file)
+with open('fig_randombox_plt.pkl', 'rb') as file1:
+    fig_randombox_plt = pickle.load(file1)
 fig_randombox_plt.show()
 ```
