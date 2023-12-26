@@ -43,10 +43,6 @@ path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
         
-```
-
-```{python}
-#| output: false
 lrnr=cnn_learner(dls,resnet34,metrics=error_rate)
 lrnr.fine_tune(1)
 
@@ -83,7 +79,7 @@ x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
 x_dog_r = x_dog_r.to('cpu')
 
 # Cat
-x_cat_r, = first(dls.test_dl([PILImage.create(get_image_files(path)[2])]))
+
 camimg_cat_r = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_cat_r,).squeeze())
 ebayesthresh = importr('EbayesThresh').ebayesthresh
 
@@ -159,7 +155,7 @@ Y_cat_r32=torch.Tensor(cv2.resize(X_cat_r32,(512,512),interpolation=cv2.INTER_LI
 x_cat_r32=x_cat_r2*Y_cat_r32-torch.min(x_cat_r2*Y_cat_r32)
 
 # Dog
-x_dog_r, = first(dls.test_dl([PILImage.create(get_image_files(path)[12])]))
+
 camimg_dog_r = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_dog_r).squeeze())
 ebayesthresh = importr('EbayesThresh').ebayesthresh
 
@@ -452,15 +448,15 @@ fig.tight_layout()
 #| title: a Randombox Dog of HCAM
 
 fig, (ax1) = plt.subplots(1,1) 
-dls.train.decode((x,))[0].squeeze().show(ax=ax1)
+dls.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
 ax1.set_title("ORIGINAL")
 fig.set_figwidth(4)            
 fig.set_figheight(4)
 fig.tight_layout()
 #
 fig, (ax1, ax2) = plt.subplots(1,2) 
-(x12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x1*0.2).squeeze().show(ax=ax2)  #MODE1_res
+(x_dog_r12*0.3).squeeze().show(ax=ax1)  #MODE1
+(x_dog_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
 ax1.set_title("MODE1")
 ax2.set_title("MODE1 RES")
 fig.set_figwidth(8)            
@@ -468,8 +464,8 @@ fig.set_figheight(8)
 fig.tight_layout()
 #
 fig, (ax1, ax2) = plt.subplots(1,2) 
-(x22*4).squeeze().show(ax=ax1)  #MODE2
-(x2).squeeze().show(ax=ax2)  #MODE2_res
+(x_dog_r22*4).squeeze().show(ax=ax1)  #MODE2
+(x_dog_r2).squeeze().show(ax=ax2)  #MODE2_res
 ax1.set_title("MODE2")
 ax2.set_title("MODE2 RES")
 fig.set_figwidth(8)            
@@ -477,8 +473,8 @@ fig.set_figheight(8)
 fig.tight_layout()
 #
 fig, (ax1, ax2) = plt.subplots(1,2) 
-(x32*8).squeeze().show(ax=ax1)  #MODE3
-(x3).squeeze().show(ax=ax2)  #MODE3_res
+(x_dog_r32*8).squeeze().show(ax=ax1)  #MODE3
+(x_dog_r3).squeeze().show(ax=ax2)  #MODE3_res
 ax1.set_title("MODE3")
 ax2.set_title("MODE3 RES")
 fig.set_figwidth(8)            
