@@ -15,7 +15,7 @@ execute:
 ---
 
 ```{python}
-#| output: false
+
 
 # Import
 from pytorch_grad_cam import GradCAM, HiResCAM, ScoreCAM, GradCAMPlusPlus, AblationCAM, XGradCAM, EigenCAM, FullGrad, EigenGradCAM, LayerCAM
@@ -402,12 +402,9 @@ cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=Non
 
 ```
 
-
-
 # Figure of HCAM
 
 ## Row {.tabset}
-
 
 ```{python}
 #| title: a Randombox Cat of HCAM
