@@ -3,7 +3,6 @@ title: "Analysis Result of HCAM"
 author: "SEOYEON CHOI"
 format:
     dashboard:
-     theme: default
      nav-buttons:
       - icon: github
         href: https://github.com/seoyeonc
@@ -15,7 +14,7 @@ execute:
 ---
 
 ```{python}
-
+#| output: false
 
 # Import
 from pytorch_grad_cam import GradCAM, HiResCAM, ScoreCAM, GradCAMPlusPlus, AblationCAM, XGradCAM, EigenCAM, FullGrad, EigenGradCAM, LayerCAM
