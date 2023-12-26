@@ -417,6 +417,12 @@ path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
 
+def label_func(f):
+    if f[0].isupper():
+        return 'cat' 
+    else: 
+        return 'dog' 
+
 fig, (ax1) = plt.subplots(1,1) 
 dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
 ax1.set_title("ORIGINAL")
@@ -461,6 +467,13 @@ from fastai.vision.all import *
 path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
+
+
+def label_func(f):
+    if f[0].isupper():
+        return 'cat' 
+    else: 
+        return 'dog' 
 
 
 fig, (ax1) = plt.subplots(1,1) 
@@ -511,6 +524,13 @@ from fastai.vision.all import *
 path_r=Path('random_pet_one')   #랜덤박스넣은사진
 files_r=get_image_files(path_r)
 dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
+
+
+def label_func(f):
+    if f[0].isupper():
+        return 'cat' 
+    else: 
+        return 'dog' 
 
 # Figure_Randombox
 fig, ((ax1,ax2,ax3,ax4),
