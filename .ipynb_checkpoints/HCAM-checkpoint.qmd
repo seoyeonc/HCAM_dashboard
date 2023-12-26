@@ -16,6 +16,7 @@ execute:
 
 ```{python}
 #| output: false
+
 # Import
 from pytorch_grad_cam import GradCAM, HiResCAM, ScoreCAM, GradCAMPlusPlus, AblationCAM, XGradCAM, EigenCAM, FullGrad, EigenGradCAM, LayerCAM
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
@@ -75,35 +76,6 @@ x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
 x_cat_r = x_cat_r.to('cpu')
 x_dog, = first(dls.test_dl([PILImage.create(get_image_files(path)[12])]))
 x_dog = x_dog.to('cpu')
-x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
-x_dog_r = x_dog_r.to('cpu')
-
-```
-
-
-
-# Figure of HCAM
-
-## Row {.tabset}
-
-```{python}
-#| title: a Randombox Cat of HCAM
-
-
-import matplotlib.pyplot as plt
-from fastai.vision.all import *
-def label_func(f):
-    if f[0].isupper():
-        return 'cat' 
-    else: 
-        return 'dog' 
-
-path_r=Path('random_pet_one')   #랜덤박스넣은사진
-files_r=get_image_files(path_r)
-dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
-
-x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
-x_cat_r = x_cat_r.to('cpu')
 x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
 x_dog_r = x_dog_r.to('cpu')
 
@@ -257,121 +229,6 @@ x_dog_r3=x_dog_r2*Y_dog_r3-torch.min(x_dog_r2*Y_dog_r3)
 X_dog_r32=np.array(A_dog_r6.to("cpu").detach(),dtype=np.float32)
 Y_dog_r32=torch.Tensor(cv2.resize(X_dog_r32,(512,512),interpolation=cv2.INTER_LINEAR))
 x_dog_r32=x_dog_r2*Y_dog_r32-torch.min(x_dog_r2*Y_dog_r32)
-
-cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=None)
-
-fig, (ax1) = plt.subplots(1,1) 
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x_cat_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r22*0.5).squeeze().show(ax=ax1)  #MODE2
-(x_cat_r2*0.2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r32*0.8).squeeze().show(ax=ax1)  #MODE3
-(x_cat_r3*0.2).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-
-
-#| title: a Randombox Dog of HCAM
-
-import matplotlib.pyplot as plt
-from fastai.vision.all import *
-def label_func(f):
-    if f[0].isupper():
-        return 'cat' 
-    else: 
-        return 'dog' 
-
-path_r=Path('random_pet_one')   #랜덤박스넣은사진
-files_r=get_image_files(path_r)
-dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
-
-x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
-x_cat_r = x_cat_r.to('cpu')
-x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
-x_dog_r = x_dog_r.to('cpu')
-
-fig, (ax1) = plt.subplots(1,1) 
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x_dog_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r22*4).squeeze().show(ax=ax1)  #MODE2
-(x_dog_r2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r32*8).squeeze().show(ax=ax1)  #MODE3
-(x_dog_r3).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-
-```
-
-
-# Other Methods
-
-```{python}
-#| title: Randombox pets Results of other Methods
-
-import matplotlib.pyplot as plt
-from fastai.vision.all import *
-def label_func(f):
-    if f[0].isupper():
-        return 'cat' 
-    else: 
-        return 'dog' 
-
-path_r=Path('random_pet_one')   #랜덤박스넣은사진
-files_r=get_image_files(path_r)
-dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
-
-x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
-x_cat_r = x_cat_r.to('cpu')
-x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
-x_dog_r = x_dog_r.to('cpu')
 
 # GradCAM
 # Cat_GradCAM
@@ -541,7 +398,97 @@ cam_cat_layercam_randombox = layercam_randombox(input_tensor=x_cat_r,targets=Non
 cam_dog_layercam_original = layercam_original(input_tensor=x_dog,targets=None)
 
 # Dog_LayerCAM_Randombox
+cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=None)
 
+```
+
+
+
+# Figure of HCAM {orientation="columns" scrolling="true"}
+
+## Column {width=50%}
+
+```{python}
+#| title: a Randombox Cat of HCAM
+
+fig, (ax1) = plt.subplots(1,1) 
+dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
+ax1.set_title("ORIGINAL")
+fig.set_figwidth(4)            
+fig.set_figheight(4)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_cat_r12*0.3).squeeze().show(ax=ax1)  #MODE1
+(x_cat_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
+ax1.set_title("MODE1")
+ax2.set_title("MODE1 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_cat_r22*0.5).squeeze().show(ax=ax1)  #MODE2
+(x_cat_r2*0.2).squeeze().show(ax=ax2)  #MODE2_res
+ax1.set_title("MODE2")
+ax2.set_title("MODE2 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_cat_r32*0.8).squeeze().show(ax=ax1)  #MODE3
+(x_cat_r3*0.2).squeeze().show(ax=ax2)  #MODE3_res
+ax1.set_title("MODE3")
+ax2.set_title("MODE3 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+```
+
+```{python}
+#| title: a Randombox Dog of HCAM
+
+fig, (ax1) = plt.subplots(1,1) 
+dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
+ax1.set_title("ORIGINAL")
+fig.set_figwidth(4)            
+fig.set_figheight(4)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_dog_r12*0.3).squeeze().show(ax=ax1)  #MODE1
+(x_dog_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
+ax1.set_title("MODE1")
+ax2.set_title("MODE1 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_dog_r22*4).squeeze().show(ax=ax1)  #MODE2
+(x_dog_r2).squeeze().show(ax=ax2)  #MODE2_res
+ax1.set_title("MODE2")
+ax2.set_title("MODE2 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+#
+fig, (ax1, ax2) = plt.subplots(1,2) 
+(x_dog_r32*8).squeeze().show(ax=ax1)  #MODE3
+(x_dog_r3).squeeze().show(ax=ax2)  #MODE3_res
+ax1.set_title("MODE3")
+ax2.set_title("MODE3 RES")
+fig.set_figwidth(8)            
+fig.set_figheight(8)
+fig.tight_layout()
+
+```
+
+# Other Methods
+
+```{python}
+#| title: Randombox pets Results of other Methods
 
 # Figure_Randombox
 fig, ((ax1,ax2,ax3,ax4),
