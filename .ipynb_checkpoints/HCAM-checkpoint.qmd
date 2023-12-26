@@ -18,7 +18,6 @@ execute:
 #| output: false
 
 # Import
-from pytorch_grad_cam import GradCAM, HiResCAM, ScoreCAM, GradCAMPlusPlus, AblationCAM, XGradCAM, EigenCAM, FullGrad, EigenGradCAM, LayerCAM
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 import torchvision
 import torch
@@ -230,176 +229,6 @@ X_dog_r32=np.array(A_dog_r6.to("cpu").detach(),dtype=np.float32)
 Y_dog_r32=torch.Tensor(cv2.resize(X_dog_r32,(512,512),interpolation=cv2.INTER_LINEAR))
 x_dog_r32=x_dog_r2*Y_dog_r32-torch.min(x_dog_r2*Y_dog_r32)
 
-# GradCAM
-# Cat_GradCAM
-# Cat_GradCAM_Original
-gradcam_original = GradCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_gradcam_original = gradcam_original(input_tensor=x_cat,targets=None)
-
-# Cat_GradCAM_Randombox
-gradcam_randombox = GradCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_gradcam_randombox = gradcam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_GradCAM
-# Dog_GradCAM_Original
-cam_dog_gradcam_original = gradcam_original(input_tensor=x_dog,targets=None)
-
-# Dog_GradCAM_Randombox
-cam_dog_gradcam_randombox = gradcam_randombox(input_tensor=x_dog_r,targets=None)
-
-# HiResCAM
-# Cat_HiResCAM
-# Cat_HiResCAM_Original
-hirescam_original = HiResCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_hirescam_original = hirescam_original(input_tensor=x_cat,targets=None)
-
-# Cat_HiResCAM_Randombox
-hirescam_randombox = HiResCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_hirescam_randombox = hirescam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_HiResCAM
-# Dog_HiResCAM_Original
-cam_dog_hirescam_original = hirescam_original(input_tensor=x_dog,targets=None)
-
-# Dog_HiResCAM_Random
-cam_dog_hirescam_randombox = hirescam_randombox(input_tensor=x_dog_r,targets=None
-
-# ScoreCAM
-# Cat_ScoreCAM
-# Cat_ScoreCAM_Original
-scorecam_original = ScoreCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_scorecam_original = scorecam_original(input_tensor=x_cat,targets=None)
-
-# Cat_ScoreCAM_Randombox
-scorecam_randombox = ScoreCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_scorecam_randombox = scorecam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_ScoreCAM
-# Dog_ScoreCAM_Original
-cam_dog_scorecam_original = scorecam_original(input_tensor=x_dog,targets=None)
-
-# Dog_ScoreCAM_Randombox
-cam_dog_scorecam_randombox = scorecam_randombox(input_tensor=x_dog_r,targets=None)
-
-# GradCAMPlusPlus
-# Cat_GradCAMPlusPlus
-# Cat_GradCAMPlusPlus_Original
-gradcamplusplus_original = GradCAMPlusPlus(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_gradcamplusplus_original = gradcamplusplus_original(input_tensor=x_cat,targets=None)
-
-# Cat_GradCAMPlusPlus_Randombox
-gradcamplusplus_randombox = GradCAMPlusPlus(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_gradcamplusplus_randombox = gradcamplusplus_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_GradCAMPlusPlus
-# Dog_GradCAMPlusPlus_Original
-cam_dog_gradcamplusplus_original = gradcamplusplus_original(input_tensor=x_dog,targets=None)
-
-# Dog_GradCAMPlusPlus_Randombox
-cam_dog_gradcamplusplus_randombox = gradcamplusplus_randombox(input_tensor=x_dog_r,targets=None)
-
-# AblationCAM
-# Cat_AblationCAM
-# Cat_AblationCAM_Original
-ablationcam_original = AblationCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_ablationcam_original = ablationcam_original(input_tensor=x_cat,targets=None)
-
-# Cat_AblationCAM_Randombox
-ablationcam_randombox = AblationCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_ablationcam_randombox = ablationcam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_AblationCAM
-# Dog_AblationCAM_Original
-cam_dog_ablationcam_original = ablationcam_original(input_tensor=x_dog,targets=None)
-
-# Dog_AblationCAM_Randombox
-cam_dog_ablationcam_randombox = ablationcam_randombox(input_tensor=x_dog_r,targets=None)
-
-# XGradCAM
-# Cat_XGradCAM
-# Cat_XGradCAM_Original
-xgradcam_original = XGradCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_xgradcam_original = xgradcam_original(input_tensor=x_cat,targets=None)
-
-# Cat_XGradCAM_Randombox
-xgradcam_randombox = XGradCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_xgradcam_randombox = xgradcam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_XGradCAM
-# Dog_XGradCAM_Original
-cam_dog_xgradcam_original = xgradcam_original(input_tensor=x_dog,targets=None)
-
-# Dog_XGradCAM_Randombox
-cam_dog_xgradcam_randombox = xgradcam_randombox(input_tensor=x_dog_r,targets=None)
-
-# EigenCAM
-# Cat_EigenCAM
-# Cat_EigenCAM_Original
-eigencam_original = EigenCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_eigencam_original = eigencam_original(input_tensor=x_cat,targets=None)
-
-# Cat_EigenCAM_Randombox
-eigencam_randombox = EigenCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_eigencam_randombox = eigencam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_EigenCAM
-# Dog_EigenCAM_Original
-cam_dog_eigencam_original = eigencam_original(input_tensor=x_dog,targets=None)
-
-# Dog_EigenCAM_Randombox
-cam_dog_eigencam_randombox = eigencam_randombox(input_tensor=x_dog_r,targets=None)
-
-# FullGrad
-# Cat_FullGrad
-# Cat_FullGrad_Original
-fullgrad_original = FullGrad(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_fullgrad_original = fullgrad_original(input_tensor=x_cat,targets=None)
-
-# Cat_FullGrad_Randombox
-fullgrad_randombox = FullGrad(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_fullgrad_randombox = fullgrad_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_FullGrad
-# Dog_FullGrad_Original
-cam_dog_fullgrad_original = fullgrad_original(input_tensor=x_dog,targets=None)
-
-# Dog_FullGrad_Randombox
-cam_dog_fullgrad_randombox = fullgrad_randombox(input_tensor=x_dog_r,targets=None)
-
-# EigenGradCAM
-# Cat_EigenGradCAM
-# Cat_EigenGradCAM_Original
-eigengradcam_original = EigenGradCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_eigengradcam_original = eigengradcam_original(input_tensor=x_cat,targets=None)
-
-# Cat_EigenGradCAM_Randombox
-eigengradcam_randombox = EigenGradCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_eigengradcam_randombox = eigengradcam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_EigenGradCAM
-# Dog_EigenGradCAM_Original
-cam_dog_eigengradcam_original = eigengradcam_original(input_tensor=x_dog,targets=None)
-
-# Dog_EigenGradCAM_Randombox
-cam_dog_eigengradcam_randombox = eigengradcam_randombox(input_tensor=x_dog_r,targets=None)
-
-# LayerCAM
-# Cat_LayerCAM
-# Cat_LayerCAM_Original
-layercam_original = LayerCAM(model=lrnr2.model.to('cpu'), target_layers=lrnr2.model[0][-1])
-cam_cat_layercam_original = layercam_original(input_tensor=x_cat,targets=None)
-
-# Cat_LayerCAM_Randombox
-layercam_randombox = LayerCAM(model=lrnr2_r.model.to('cpu'), target_layers=lrnr2_r.model[0][-1])
-cam_cat_layercam_randombox = layercam_randombox(input_tensor=x_cat_r,targets=None)
-
-# Dog_LayerCAM
-# Dog_LayerCAM_Original
-cam_dog_layercam_original = layercam_original(input_tensor=x_dog,targets=None)
-
-# Dog_LayerCAM_Randombox
-cam_dog_layercam_randombox = layercam_randombox(input_tensor=x_dog_r,targets=None)
-
 ```
 
 # Figure of HCAM
@@ -485,106 +314,10 @@ fig.tight_layout()
 
 # Other Methods
 
-```{python}
-#| title: Randombox pets Results of other Methods
-
-# Figure_Randombox
-fig, ((ax1,ax2,ax3,ax4),
-      (ax5,ax6,ax7,ax8),
-      (ax9,ax10,ax11,ax12),
-      (ax13,ax14,ax15,ax16),
-     (ax17,ax18,ax19,ax20)) = plt.subplots(5,4) 
-plt.title('Randombox')
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
-ax1.imshow(cam_cat_gradcam_randombox.squeeze(), alpha=0.7)
-ax1.set_title("GradCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax2)
-ax2.imshow(cam_dog_gradcam_randombox.squeeze(), alpha=0.7)
-ax2.set_title("GradCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax3)
-ax3.imshow(cam_cat_hirescam_randombox.squeeze(), alpha=0.7)
-ax3.set_title("HiResCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax4)
-ax4.imshow(cam_dog_hirescam_randombox.squeeze(), alpha=0.7)
-ax4.set_title("HiResCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax5)
-ax5.imshow(cam_cat_scorecam_randombox.squeeze(), alpha=0.7)
-ax5.set_title("ScoreCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax6)
-ax6.imshow(cam_dog_scorecam_randombox.squeeze(), alpha=0.7)
-ax6.set_title("ScoreCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax7)
-ax7.imshow(cam_cat_gradcamplusplus_randombox.squeeze(), alpha=0.7)
-ax7.set_title("GradCAMPlusPlus CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax8)
-ax8.imshow(cam_dog_gradcamplusplus_randombox.squeeze(), alpha=0.7)
-ax8.set_title("GradCAMPlusPlus DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax9)
-ax9.imshow(cam_cat_ablationcam_randombox.squeeze(), alpha=0.7)
-ax9.set_title("AblationCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax10)
-ax10.imshow(cam_dog_ablationcam_randombox.squeeze(), alpha=0.7)
-ax10.set_title("AblationCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax11)
-ax11.imshow(cam_cat_xgradcam_randombox.squeeze(), alpha=0.7)
-ax11.set_title("XGradCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax12)
-ax12.imshow(cam_dog_xgradcam_randombox.squeeze(), alpha=0.7)
-ax12.set_title("XGradCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax13)
-ax13.imshow(cam_cat_eigencam_randombox.squeeze(), alpha=0.7)
-ax13.set_title("EigenCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax14)
-ax14.imshow(cam_dog_eigencam_randombox.squeeze(), alpha=0.7)
-ax14.set_title("EigenCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax15)
-ax15.imshow(cam_cat_fullgrad_randombox.squeeze(), alpha=0.7)
-ax15.set_title("FullGrad CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax16)
-ax16.imshow(cam_dog_fullgrad_randombox.squeeze(), alpha=0.7)
-ax16.set_title("FullGrad DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax17)
-ax17.imshow(cam_cat_eigengradcam_randombox.squeeze(), alpha=0.7)
-ax17.set_title("EigenGradCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax18)
-ax18.imshow(cam_dog_eigengradcam_randombox.squeeze(), alpha=0.7)
-ax18.set_title("EigenGradCAM DOG PART")
-#
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax19)
-ax19.imshow(cam_cat_layercam_randombox.squeeze(), alpha=0.7)
-ax19.set_title("LayerCAM CAT PART")
-#
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax20)
-ax20.imshow(cam_dog_layercam_randombox.squeeze(), alpha=0.7)
-ax20.set_title("LayerCAM DOG PART")
-#
-fig.set_figwidth(20)            
-fig.set_figheight(20)
-fig.tight_layout()
-
-```
-
-# dd
+## Row {.tabset}
 
 ```{python}
+#| title: Original pets Results of other Methods
 
 import pickle
 
@@ -594,6 +327,7 @@ fig_original_plt.show()
 ```
 
 ```{python}
+#| title: Randombox pets Results of other Methods
 
 import pickle
 
