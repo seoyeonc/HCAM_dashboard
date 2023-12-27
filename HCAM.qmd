@@ -16,7 +16,9 @@ execute:
 
 # Figure of HCAM
 
-## Row {.tabset}
+## Column {width=50%}
+
+### Row {.tabset}
 
 ```{python}
 #| title: a Randombox Cat of HCAM
@@ -60,9 +62,12 @@ with open('hcam_cat_plt_mode3.pkl', 'rb') as file:
     hcam_cat_plt_mode3 = pickle.load(file)
 hcam_cat_plt_mode3.show()
 
+
 ```
 
-## Row {.tabset}
+## Column {width=50%}
+
+### Row {.tabset}
 
 ```{python}
 #| title: a Randombox Dog of HCAM
