@@ -14,7 +14,7 @@ execute:
   error: true
 ---
 
-# Figure of HCAM - Cat
+# Figure of HCAM - Cat {orientation="columns" scrolling="true"}
 
 ## Row {.tabset}
 
@@ -63,7 +63,7 @@ hcam_cat_plt_mode3.show()
 
 ```
 
-# Figure of HCAM - Dog
+# Figure of HCAM - Dog {orientation="columns" scrolling="true"}
 
 ## Row {.tabset}
 
