@@ -14,11 +14,9 @@ execute:
   error: true
 ---
 
-# Figure of HCAM
+# Figure of HCAM - Cat
 
-## Column {width=50%}
-
-### Row {.tabset}
+## Row {.tabset}
 
 ```{python}
 #| title: a Randombox Cat of HCAM
@@ -32,7 +30,7 @@ hcam_cat_plt.show()
 ```
 
 ```{python}
-#| title: Mode 1 - a Randombox Cat of HCAM
+#| title: Mode 1
 
 import pickle
 
@@ -43,7 +41,7 @@ hcam_cat_plt_mode1.show()
 ```
 
 ```{python}
-#| title: Mode 2 - a Randombox Cat of HCAM
+#| title: Mode 1 + Mode 2
 
 import pickle
 
@@ -54,7 +52,7 @@ hcam_cat_plt_mode2.show()
 ```
 
 ```{python}
-#| title: Modde 3 - a Randombox Cat of HCAM
+#| title: Mode 1 + Mode 2 + Mode 3
 
 import pickle
 
@@ -65,9 +63,9 @@ hcam_cat_plt_mode3.show()
 
 ```
 
-## Column {width=50%}
+# Figure of HCAM - Dog
 
-### Row {.tabset}
+## Row {.tabset}
 
 ```{python}
 #| title: a Randombox Dog of HCAM
@@ -81,7 +79,7 @@ hcam_dog_plt.show()
 ```
 
 ```{python}
-#| title: Mode 1 - a Randombox Dog of HCAM
+#| title: Mode 1
 
 import pickle
 
@@ -92,7 +90,7 @@ hcam_dog_plt_mode1.show()
 ```
 
 ```{python}
-#| title: Mode 2 - a Randombox Dog of HCAM
+#| title: Mode 1 + Mode 2
 
 import pickle
 
@@ -103,7 +101,7 @@ hcam_dog_plt_mode2.show()
 ```
 
 ```{python}
-#| title: Mode 3 - a Randombox Cat of HCAM
+#| title: Mode 1 + Mode 2 + Mode 3
 
 import pickle
 
