@@ -14,223 +14,6 @@ execute:
   error: true
 ---
 
-```{python}
-#| output: false
-
-# Import
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
-import torchvision
-import torch
-import torch.nn as nn
-import cv2
-import matplotlib.pyplot as plt
-from PIL import Image
-from torchvision.models import resnet50
-from fastai.vision.all import *
-from torchvision import transforms
-def label_func(f):
-    if f[0].isupper():
-        return 'cat' 
-    else: 
-        return 'dog' 
-
-# Data
-path=Path('original_pet') 
-files=get_image_files(path)
-dls=ImageDataLoaders.from_name_func(path,files,label_func,item_tfms=Resize(512)) 
-
-path_r=Path('random_pet_one')   #랜덤박스넣은사진
-files_r=get_image_files(path_r)
-dls_r=ImageDataLoaders.from_name_func(path_r,files_r,label_func,item_tfms=Resize(512)) 
-        
-lrnr=cnn_learner(dls,resnet34,metrics=error_rate)
-lrnr.fine_tune(1)
-
-net1=lrnr.model[0]
-net2=lrnr.model[1]
-net2 = torch.nn.Sequential(
-    torch.nn.AdaptiveAvgPool2d(output_size=1), 
-    torch.nn.Flatten(),
-    torch.nn.Linear(512,out_features=2,bias=False))
-net=torch.nn.Sequential(net1,net2)
-lrnr2=Learner(dls,net,metrics=accuracy) 
-lrnr2.fine_tune(5) 
-
-lrnr_r=cnn_learner(dls_r,resnet34,metrics=error_rate)
-lrnr_r.fine_tune(1)
-
-net1_r=lrnr_r.model[0]
-net2_r=lrnr_r.model[1]
-net2_r = torch.nn.Sequential(
-    torch.nn.AdaptiveAvgPool2d(output_size=1), 
-    torch.nn.Flatten(),
-    torch.nn.Linear(512,out_features=2,bias=False))
-net_r=torch.nn.Sequential(net1_r,net2_r)
-lrnr2_r=Learner(dls_r,net_r,metrics=accuracy) 
-lrnr2_r.fine_tune(5) 
-
-x_cat, = first(dls.test_dl([PILImage.create(get_image_files(path)[2])]))
-x_cat = x_cat.to('cpu')
-x_cat_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[2])]))
-x_cat_r = x_cat_r.to('cpu')
-x_dog, = first(dls.test_dl([PILImage.create(get_image_files(path)[12])]))
-x_dog = x_dog.to('cpu')
-x_dog_r, = first(dls_r.test_dl([PILImage.create(get_image_files(path_r)[12])]))
-x_dog_r = x_dog_r.to('cpu')
-
-# Cat
-
-camimg_cat_r = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_cat_r,).squeeze())
-ebayesthresh = importr('EbayesThresh').ebayesthresh
-
-power_threshed_cat_r=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r[0].detach().reshape(-1))**2)))
-ybar_threshed_cat_r = np.where(power_threshed_cat_r>1600,torch.tensor(camimg_cat_r[0].detach().reshape(-1)),0)
-ybar_threshed_cat_r = torch.tensor(ybar_threshed_cat_r.reshape(16,16))
-
-power_threshed_cat_r2=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r[1].detach().reshape(-1))**2)))
-ybar_threshed_cat_r2 = np.where(power_threshed_cat_r2>2100,torch.tensor(camimg_cat_r[1].detach().reshape(-1)),0)
-ybar_threshed_cat_r2 = torch.tensor(ybar_threshed_cat_r2.reshape(16,16))
-
-# Mode 1
-
-A_cat_r1=torch.exp(-0.05*(ybar_threshed_cat_r))
-A_cat_r2 = 1 - A_cat_r1
-
-X_cat_r1=np.array(A1.to("cpu").detach(),dtype=np.float32)
-Y_cat_r1=torch.Tensor(cv2.resize(X_cat_r1,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r1=x_cat_r,.squeeze().to('cpu')*Y_cat_r1-torch.min(x_cat_r,.squeeze().to('cpu'))*Y_cat_r1
-
-X_cat_r12=np.array(A2.to("cpu").detach(),dtype=np.float32)
-Y_cat_r12=torch.Tensor(cv2.resize(X_cat_r12,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r12=x_cat_r,.squeeze().to('cpu')*Y_cat_r12-torch.min(x_cat_r,.squeeze().to('cpu'))*_cat_rY12
-
-x_cat_r1 = x_cat_r1.reshape(1,3,512,512)
-net1.to('cpu')
-net2.to('cpu')
-
-camimg_cat_r1 = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_cat_r1).squeeze())
-power_threshed_cat_r3=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r1[0].detach().reshape(-1))**2)))
-ybar_threshed_cat_r3 = np.where(power_threshed_cat_r3>10,torch.tensor(camimg_cat_r1[0].detach().reshape(-1)),0)
-ybar_threshed_cat_r3 = torch.tensor(ybar_threshed_cat_r3.reshape(16,16))
-
-power_threshed_cat_r4=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r1[1].detach().reshape(-1))**2)))
-ybar_threshed_cat_r4 = np.where(power_threshed_cat_r4>10,torch.tensor(camimg_cat_r1[1].detach().reshape(-1)),0)
-ybar_threshed_cat_r4 = torch.tensor(ybar_threshed_cat_r4.reshape(16,16))
-
-# Mode 2
-A_cat_r3 = torch.exp(-0.05*(ybar_threshed3_cat_r))
-A_cat_r4 = 1 - A_cat_r3
-
-X_cat_r2=np.array(A_cat_r3.to("cpu").detach(),dtype=np.float32)
-Y_cat_r2=torch.Tensor(cv2.resize(X_cat_r2,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r2=(x_cat_r1)*Y_cat_r2-torch.min((x_cat_r1)*Y_cat_r2)
-
-X_cat_r22=np.array(A_cat_r4.to("cpu").detach(),dtype=np.float32)
-Y_cat_r22=torch.Tensor(cv2.resize(X_cat_r22,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r22=(x_cat_r1)*Y_cat_r22-torch.min((x_cat_r1)*Y_cat_r22)
-
-x_cat_r2 = x_cat_r2.reshape(1,3,512,512)
-net1.to('cpu')
-net2.to('cpu')
-
-camimg_cat_r2 = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_cat_r2).squeeze())
-power_threshed_cat_r5=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r2[0].detach().reshape(-1))**2)))
-ybar_threshed_cat_r5 = np.where(power_threshed_cat_r5>4,torch.tensor(camimg_cat_r2[0].detach().reshape(-1)),0)
-ybar_threshed_cat_r5 = torch.tensor(ybar_threshed_cat_r5.reshape(16,16))
-
-power_threshed_cat_r6=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_cat_r2[1].detach().reshape(-1))**2)))
-ybar_threshed_cat_r6 = np.where(power_threshed_cat_r6>4,torch.tensor(camimg_cat_r2[1].detach().reshape(-1)),0)
-ybar_threshed_cat_r6 = torch.tensor(ybar_threshed_cat_r6.reshape(16,16))
-
-# Mode 3
-A_cat_r5 = torch.exp(-0.05*(ybar_threshed_cat_r5))
-A_cat_r6 = 1 - A_cat_r5
-
-X_cat_r3=np.array(A_cat_r5.to("cpu").detach(),dtype=np.float32)
-Y_cat_r3=torch.Tensor(cv2.resize(X_cat_r3,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r3=x_cat_r2*Y_cat_r3-torch.min(x_cat_r2*Y_cat_r3)
-# mode 3
-X_cat_r32=np.array(A_cat_r6.to("cpu").detach(),dtype=np.float32)
-Y_cat_r32=torch.Tensor(cv2.resize(X_cat_r32,(512,512),interpolation=cv2.INTER_LINEAR))
-x_cat_r32=x_cat_r2*Y_cat_r32-torch.min(x_cat_r2*Y_cat_r32)
-
-# Dog
-
-camimg_dog_r = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_dog_r).squeeze())
-ebayesthresh = importr('EbayesThresh').ebayesthresh
-
-power_threshed_dog_r=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r[0].detach().reshape(-1))**2)))
-ybar_threshe_dog_rd = np.where(power_threshed_dog_r>1600,torch.tensor(camimg_dog_r[0].detach().reshape(-1)),0)
-ybar_threshed_dog_r = torch.tensor(ybar_threshed_dog_r.reshape(16,16))
-
-power_threshed_dog_r2=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r[1].detach().reshape(-1))**2)))
-ybar_threshed_dog_r2 = np.where(power_threshed_dog_r2>2100,torch.tensor(camimg_dog_r[1].detach().reshape(-1)),0)
-ybar_threshed_dog_r2 = torch.tensor(ybar_threshed_dog_r2.reshape(16,16))
-
-# Mode 1
-A_dog_r1=torch.exp(-0.05*(ybar_threshed_dog_r2))
-A_dog_r2 = 1 - A_dog_r1
-
-X_dog_r1=np.array(A_dog_r1.to("cpu").detach(),dtype=np.float32)
-Y_dog_r1=torch.Tensor(cv2.resize(X_dog_r1,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r1=x_dog_r.squeeze().to('cpu')*Y_dog_r1-torch.min(x_dog_r.squeeze().to('cpu'))*Y_dog_r1
-
-X_dog_r12=np.array(A_dog_r2.to("cpu").detach(),dtype=np.float32)
-Y_dog_r12=torch.Tensor(cv2.resize(X_dog_r12,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r12=x_dog_r.squeeze().to('cpu')*Y_dog_r12-torch.min(x_dog_r.squeeze().to('cpu'))*Y_dog_r12
-
-x_dog_r1 = x_dog_r1.reshape(1,3,512,512)
-net1.to('cpu')
-net2.to('cpu')
-
-camimg_dog_r1 = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_dog_r1).squeeze())
-power_threshed_dog_r3=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r1[0].detach().reshape(-1))**2)))
-ybar_threshed_dog_r3 = np.where(power_threshed_dog_r3>10,torch.tensor(camimg_dog_r1[0].detach().reshape(-1)),0)
-ybar_threshed_dog_r3 = torch.tensor(ybar_threshed_dog_r3.reshape(16,16))
-
-power_threshed_dog_r4=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r1[1].detach().reshape(-1))**2)))
-ybar_threshed_dog_r4 = np.where(power_threshed_dog_r4>10,torch.tensor(camimg_dog_r1[1].detach().reshape(-1)),0)
-ybar_threshed_dog_r4 = torch.tensor(ybar_threshed_dog_r4.reshape(16,16))
-
-# Mode 2
-A_dog_r3 = torch.exp(-0.05*(ybar_threshed_dog_r4))
-A_dog_r4 = 1 - A_dog_r3
-
-X_dog_r2=np.array(A_dog_r3.to("cpu").detach(),dtype=np.float32)
-Y_dog_r2=torch.Tensor(cv2.resize(X_dog_r2,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r2=(x_dog_r1*0.2)*Y_dog_r2-torch.min((x_dog_r1*0.2)*Y_dog_r2)
-
-X_dog_r22=np.array(A_dog_r4.to("cpu").detach(),dtype=np.float32)
-Y_dog_r22=torch.Tensor(cv2.resize(X_dog_r22,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r22=(x_dog_r1*0.2)*Y_dog_r22-torch.min((x_dog_r1*0.2)*Y_dog_r22)
-
-x_dog_r2 = x_dog_r2.reshape(1,3,512,512)
-net1.to('cpu')
-net2.to('cpu')
-
-camimg_dog_r2 = torch.einsum('ij,jkl -> ikl', net2[2].weight, net1(x_dog_r2).squeeze())
-power_threshed_dog_r5=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r2[0].detach().reshape(-1))**2)))
-ybar_threshed_dog_r5 = np.where(power_threshed_dog_r5>4,torch.tensor(camimg_dog_r2[0].detach().reshape(-1)),0)
-ybar_threshed_dog_r5 = torch.tensor(ybar_threshed_dog_r5.reshape(16,16))
-
-power_threshed_dog_r6=np.array(ebayesthresh(FloatVector(torch.tensor(camimg_dog_r2[1].detach().reshape(-1))**2)))
-ybar_threshed_dog_r6 = np.where(power_threshed_dog_r6>4,torch.tensor(camimg_dog_r2[1].detach().reshape(-1)),0)
-ybar_threshed_dog_r6 = torch.tensor(ybar_threshed_dog_r6.reshape(16,16))
-
-# Mode 3
-A_dog_r5 = torch.exp(-0.05*(ybar_threshed_dog_r6))
-A_dog_r6 = 1 - A_dog_r5
-
-X_dog_r3=np.array(A_dog_r5.to("cpu").detach(),dtype=np.float32)
-Y_dog_r3=torch.Tensor(cv2.resize(X_dog_r3,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r3=x_dog_r2*Y_dog_r3-torch.min(x_dog_r2*Y_dog_r3)
-
-X_dog_r32=np.array(A_dog_r6.to("cpu").detach(),dtype=np.float32)
-Y_dog_r32=torch.Tensor(cv2.resize(X_dog_r32,(512,512),interpolation=cv2.INTER_LINEAR))
-x_dog_r32=x_dog_r2*Y_dog_r32-torch.min(x_dog_r2*Y_dog_r32)
-
-```
-
 # Figure of HCAM
 
 ## Row {.tabset}
@@ -238,77 +21,90 @@ x_dog_r32=x_dog_r2*Y_dog_r32-torch.min(x_dog_r2*Y_dog_r32)
 ```{python}
 #| title: a Randombox Cat of HCAM
 
-fig, (ax1) = plt.subplots(1,1) 
-dls_r.train.decode((x_cat_r,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x_cat_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r22*0.5).squeeze().show(ax=ax1)  #MODE2
-(x_cat_r2*0.2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_cat_r32*0.8).squeeze().show(ax=ax1)  #MODE3
-(x_cat_r3*0.2).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
+import pickle
+
+with open('hcam_cat_plt.pkl', 'rb') as file:
+    hcam_cat_plt = pickle.load(file)
+hcam_cat_plt.show()
+
 ```
+
+```{python}
+#| title: Mode 1 - a Randombox Cat of HCAM
+
+import pickle
+
+with open('hcam_cat_plt_mode1.pkl', 'rb') as file:
+    hcam_cat_plt_mode1 = pickle.load(file)
+hcam_cat_plt_mode1.show()
+
+```
+
+```{python}
+#| title: Mode 2 - a Randombox Cat of HCAM
+
+import pickle
+
+with open('hcam_cat_plt_mode2.pkl', 'rb') as file:
+    hcam_cat_plt_mode2 = pickle.load(file)
+hcam_cat_plt_mode2.show()
+
+```
+
+```{python}
+#| title: Modde 3 - a Randombox Cat of HCAM
+
+import pickle
+
+with open('hcam_cat_plt_mode3.pkl', 'rb') as file:
+    hcam_cat_plt_mode3 = pickle.load(file)
+hcam_cat_plt_mode3.show()
+
+```
+
+## Row {.tabset}
 
 ```{python}
 #| title: a Randombox Dog of HCAM
 
-fig, (ax1) = plt.subplots(1,1) 
-dls_r.train.decode((x_dog_r,))[0].squeeze().show(ax=ax1)
-ax1.set_title("ORIGINAL")
-fig.set_figwidth(4)            
-fig.set_figheight(4)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r12*0.3).squeeze().show(ax=ax1)  #MODE1
-(x_dog_r1*0.2).squeeze().show(ax=ax2)  #MODE1_res
-ax1.set_title("MODE1")
-ax2.set_title("MODE1 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r22*4).squeeze().show(ax=ax1)  #MODE2
-(x_dog_r2).squeeze().show(ax=ax2)  #MODE2_res
-ax1.set_title("MODE2")
-ax2.set_title("MODE2 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
-#
-fig, (ax1, ax2) = plt.subplots(1,2) 
-(x_dog_r32*8).squeeze().show(ax=ax1)  #MODE3
-(x_dog_r3).squeeze().show(ax=ax2)  #MODE3_res
-ax1.set_title("MODE3")
-ax2.set_title("MODE3 RES")
-fig.set_figwidth(8)            
-fig.set_figheight(8)
-fig.tight_layout()
+import pickle
+
+with open('hcam_dog_plt.pkl', 'rb') as file:
+    hcam_dog_plt = pickle.load(file)
+hcam_dog_plt.show()
+
+```
+
+```{python}
+#| title: Mode 1 - a Randombox Dog of HCAM
+
+import pickle
+
+with open('hcam_dog_plt_mode1.pkl', 'rb') as file:
+    hcam_dog_plt_mode1 = pickle.load(file)
+hcam_dog_plt_mode1.show()
+
+```
+
+```{python}
+#| title: Mode 2 - a Randombox Dog of HCAM
+
+import pickle
+
+with open('hcam_dog_plt_mode2.pkl', 'rb') as file:
+    hcam_dog_plt_mode2 = pickle.load(file)
+hcam_dog_plt_mode2.show()
+
+```
+
+```{python}
+#| title: Mode 3 - a Randombox Cat of HCAM
+
+import pickle
+
+with open('hcam_dog_plt_mode3.pkl', 'rb') as file:
+    hcam_dog_plt_mode3 = pickle.load(file)
+hcam_dog_plt_mode3.show()
 
 ```
 
