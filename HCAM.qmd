@@ -16,7 +16,7 @@ execute:
 
 # Figure of HCAM - Cat
 
-## Row
+## Column
 
 ## Row {.tabset}
 
@@ -36,7 +36,7 @@ hcam_cat_plt.show()
 
 import pickle
 
-with open('hcam_cat2_plt.pkl', 'rb') as file:
+with open('hcam_cat_plt2.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
@@ -101,7 +101,7 @@ hcam_cat_plt_mode3.show()
 
 # Figure of HCAM - Dog
 
-## Row
+## Column
 
 ## Row {.tabset}
 
