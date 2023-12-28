@@ -16,9 +16,9 @@ execute:
 
 # Figure of HCAM - Cat
 
-## Column
+## Column {width=50%}
 
-## Row {.tabset}
+### Row {.tabset}
 
 ```{python}
 #| title: a Randombox Cat of HCAM
@@ -63,7 +63,9 @@ with open('hcam_cat_plt4.pkl', 'rb') as file:
 hcam_cat_plt.show()
 
 ```
-## Row {.tabset}
+## Column {width=50%}
+
+### Row {.tabset}
 
 ```{python}
 #| title: Mode 1
@@ -101,9 +103,9 @@ hcam_cat_plt_mode3.show()
 
 # Figure of HCAM - Dog
 
-## Column
+## Column {width=50%}
 
-## Row {.tabset}
+### Row {.tabset}
 
 ```{python}
 #| title: a Randombox Dog of HCAM
@@ -149,7 +151,9 @@ hcam_dog_plt.show()
 
 ```
 
-## Row {.tabset}
+## Column {width=50%}
+
+### Row {.tabset}
 
 ```{python}
 #| title: Mode 1
