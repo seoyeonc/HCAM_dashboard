@@ -21,7 +21,7 @@ execute:
 ## Row {.tabset}
 
 ```{python}
-#| title: a Randombox Cat of HCAM(Mode 1)
+#| title: a Randombox Cat of HCAM
 
 import pickle
 
@@ -32,7 +32,7 @@ hcam_cat_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 2)
+#| title: Mode 1
 
 import pickle
 
@@ -43,7 +43,7 @@ hcam_cat_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 3)
+#| title: Mode 2
 
 import pickle
 
@@ -54,7 +54,7 @@ hcam_cat_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 4)
+#| title: Mode 3
 
 import pickle
 
@@ -106,7 +106,7 @@ hcam_cat_plt_mode3.show()
 ## Row {.tabset}
 
 ```{python}
-#| title: a Randombox Dog of HCAM(Mode 1)
+#| title: a Randombox Dog of HCAM
 
 import pickle
 
@@ -117,7 +117,7 @@ hcam_dog_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 2)
+#| title: Mode 1
 
 import pickle
 
@@ -128,7 +128,7 @@ hcam_dog_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 3)
+#| title: Mode 2
 
 import pickle
 
@@ -139,7 +139,7 @@ hcam_dog_plt.show()
 ```
 
 ```{python}
-#| title: (Mode 4)
+#| title: Mode 3
 
 import pickle
 
