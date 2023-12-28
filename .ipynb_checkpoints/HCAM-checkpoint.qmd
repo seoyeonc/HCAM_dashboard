@@ -14,20 +14,56 @@ execute:
   error: true
 ---
 
-# Figure of HCAM - Cat {orientation="columns" scrolling="true"}
+# Figure of HCAM - Cat
+
+## Row
 
 ## Row {.tabset}
 
 ```{python}
-#| title: a Randombox Cat of HCAM
+#| title: a Randombox Cat of HCAM(Mode 1)
 
 import pickle
 
-with open('hcam_cat_plt.pkl', 'rb') as file:
+with open('hcam_cat_plt1.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
 ```
+
+```{python}
+#| title: (Mode 2)
+
+import pickle
+
+with open('hcam_cat2_plt.pkl', 'rb') as file:
+    hcam_cat_plt = pickle.load(file)
+hcam_cat_plt.show()
+
+```
+
+```{python}
+#| title: (Mode 3)
+
+import pickle
+
+with open('hcam_cat_plt3.pkl', 'rb') as file:
+    hcam_cat_plt = pickle.load(file)
+hcam_cat_plt.show()
+
+```
+
+```{python}
+#| title: (Mode 4)
+
+import pickle
+
+with open('hcam_cat_plt4.pkl', 'rb') as file:
+    hcam_cat_plt = pickle.load(file)
+hcam_cat_plt.show()
+
+```
+## Row {.tabset}
 
 ```{python}
 #| title: Mode 1
@@ -63,20 +99,57 @@ hcam_cat_plt_mode3.show()
 
 ```
 
-# Figure of HCAM - Dog {orientation="columns" scrolling="true"}
+# Figure of HCAM - Dog
+
+## Row
 
 ## Row {.tabset}
 
 ```{python}
-#| title: a Randombox Dog of HCAM
+#| title: a Randombox Dog of HCAM(Mode 1)
 
 import pickle
 
-with open('hcam_dog_plt.pkl', 'rb') as file:
+with open('hcam_dog_plt1.pkl', 'rb') as file:
     hcam_dog_plt = pickle.load(file)
 hcam_dog_plt.show()
 
 ```
+
+```{python}
+#| title: (Mode 2)
+
+import pickle
+
+with open('hcam_dog_plt2.pkl', 'rb') as file:
+    hcam_dog_plt = pickle.load(file)
+hcam_dog_plt.show()
+
+```
+
+```{python}
+#| title: (Mode 3)
+
+import pickle
+
+with open('hcam_dog_plt3.pkl', 'rb') as file:
+    hcam_dog_plt = pickle.load(file)
+hcam_dog_plt.show()
+
+```
+
+```{python}
+#| title: (Mode 4)
+
+import pickle
+
+with open('hcam_dog_plt4.pkl', 'rb') as file:
+    hcam_dog_plt = pickle.load(file)
+hcam_dog_plt.show()
+
+```
+
+## Row {.tabset}
 
 ```{python}
 #| title: Mode 1
