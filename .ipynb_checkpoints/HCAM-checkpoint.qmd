@@ -14,7 +14,7 @@ execute:
   error: true
 ---
 
-# Figure of HCAM - Cat
+# Cat
 
 ## Column {width=50%}
 
@@ -101,7 +101,7 @@ hcam_cat_plt_mode3.show()
 
 ```
 
-# Figure of HCAM - Dog
+# Dog
 
 ## Column {width=50%}
 
@@ -278,12 +278,12 @@ CALTECH_101_hcam_plt_mode3.show()
 
 
 
-# Other Methods
+# The results of Other Methods
 
 ## Row {.tabset}
 
 ```{python}
-#| title: Original pets Results
+#| title: Original pets
 
 import pickle
 
@@ -293,7 +293,7 @@ fig_original_plt.show()
 ```
 
 ```{python}
-#| title: Randombox pets Results
+#| title: Randombox pets
 
 import pickle
 
@@ -303,7 +303,7 @@ fig_randombox_plt.show()
 ```
 
 ```{python}
-#| title: Original and Randombox Results
+#| title: CALTECH_101
 
 import pickle
 
