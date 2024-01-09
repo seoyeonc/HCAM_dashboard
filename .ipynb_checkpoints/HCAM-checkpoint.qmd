@@ -200,7 +200,7 @@ hcam_dog_plt_mode3.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt1.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt1.pkl', 'rb') as file:
     CALTECH_101_hcam_plt = pickle.load(file)
 CALTECH_101_hcam_plt.show()
 
@@ -211,7 +211,7 @@ CALTECH_101_hcam_plt.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt2.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt2.pkl', 'rb') as file:
     CALTECH_101_hcam_plt = pickle.load(file)
 CALTECH_101_hcam_plt.show()
 
@@ -222,7 +222,7 @@ CALTECH_101_hcam_plt.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt3.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt3.pkl', 'rb') as file:
     CALTECH_101_hcam_plt = pickle.load(file)
 CALTECH_101_hcam_plt.show()
 
@@ -233,7 +233,7 @@ CALTECH_101_hcam_plt.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt4.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt4.pkl', 'rb') as file:
     CALTECH_101_hcam_plt = pickle.load(file)
 CALTECH_101_hcam_plt.show()
 
@@ -247,7 +247,7 @@ CALTECH_101_hcam_plt.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode1.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt_mode1.pkl', 'rb') as file:
     CALTECH_101_hcam_plt_mode1 = pickle.load(file)
 CALTECH_101_hcam_plt_mode1.show()
 
@@ -258,7 +258,7 @@ CALTECH_101_hcam_plt_mode1.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode2.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt_mode2.pkl', 'rb') as file:
     CALTECH_101_hcam_plt_mode2 = pickle.load(file)
 CALTECH_101_hcam_plt_mode2.show()
 
@@ -269,7 +269,7 @@ CALTECH_101_hcam_plt_mode2.show()
 
 import pickle
 
-with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode3.pkl', 'rb') as file:
+with open('Fig/CALTECH_101/CALTECH_101_random_hcam_plt_mode3.pkl', 'rb') as file:
     CALTECH_101_hcam_plt_mode3 = pickle.load(file)
 CALTECH_101_hcam_plt_mode3.show()
 
