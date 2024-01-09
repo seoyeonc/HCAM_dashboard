@@ -25,7 +25,7 @@ execute:
 
 import pickle
 
-with open('hcam_cat_plt1.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt1.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
@@ -36,7 +36,7 @@ hcam_cat_plt.show()
 
 import pickle
 
-with open('hcam_cat_plt2.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt2.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
@@ -47,7 +47,7 @@ hcam_cat_plt.show()
 
 import pickle
 
-with open('hcam_cat_plt3.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt3.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
@@ -58,7 +58,7 @@ hcam_cat_plt.show()
 
 import pickle
 
-with open('hcam_cat_plt4.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt4.pkl', 'rb') as file:
     hcam_cat_plt = pickle.load(file)
 hcam_cat_plt.show()
 
@@ -72,7 +72,7 @@ hcam_cat_plt.show()
 
 import pickle
 
-with open('hcam_cat_plt_mode1.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt_mode1.pkl', 'rb') as file:
     hcam_cat_plt_mode1 = pickle.load(file)
 hcam_cat_plt_mode1.show()
 
@@ -83,7 +83,7 @@ hcam_cat_plt_mode1.show()
 
 import pickle
 
-with open('hcam_cat_plt_mode2.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt_mode2.pkl', 'rb') as file:
     hcam_cat_plt_mode2 = pickle.load(file)
 hcam_cat_plt_mode2.show()
 
@@ -94,7 +94,7 @@ hcam_cat_plt_mode2.show()
 
 import pickle
 
-with open('hcam_cat_plt_mode3.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_cat_plt_mode3.pkl', 'rb') as file:
     hcam_cat_plt_mode3 = pickle.load(file)
 hcam_cat_plt_mode3.show()
 
@@ -112,7 +112,7 @@ hcam_cat_plt_mode3.show()
 
 import pickle
 
-with open('hcam_dog_plt1.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt1.pkl', 'rb') as file:
     hcam_dog_plt = pickle.load(file)
 hcam_dog_plt.show()
 
@@ -123,7 +123,7 @@ hcam_dog_plt.show()
 
 import pickle
 
-with open('hcam_dog_plt2.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt2.pkl', 'rb') as file:
     hcam_dog_plt = pickle.load(file)
 hcam_dog_plt.show()
 
@@ -134,7 +134,7 @@ hcam_dog_plt.show()
 
 import pickle
 
-with open('hcam_dog_plt3.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt3.pkl', 'rb') as file:
     hcam_dog_plt = pickle.load(file)
 hcam_dog_plt.show()
 
@@ -145,7 +145,7 @@ hcam_dog_plt.show()
 
 import pickle
 
-with open('hcam_dog_plt4.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt4.pkl', 'rb') as file:
     hcam_dog_plt = pickle.load(file)
 hcam_dog_plt.show()
 
@@ -160,7 +160,7 @@ hcam_dog_plt.show()
 
 import pickle
 
-with open('hcam_dog_plt_mode1.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt_mode1.pkl', 'rb') as file:
     hcam_dog_plt_mode1 = pickle.load(file)
 hcam_dog_plt_mode1.show()
 
@@ -171,7 +171,7 @@ hcam_dog_plt_mode1.show()
 
 import pickle
 
-with open('hcam_dog_plt_mode2.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt_mode2.pkl', 'rb') as file:
     hcam_dog_plt_mode2 = pickle.load(file)
 hcam_dog_plt_mode2.show()
 
@@ -182,32 +182,136 @@ hcam_dog_plt_mode2.show()
 
 import pickle
 
-with open('hcam_dog_plt_mode3.pkl', 'rb') as file:
+with open('Fig/PETS/hcam_dog_plt_mode3.pkl', 'rb') as file:
     hcam_dog_plt_mode3 = pickle.load(file)
 hcam_dog_plt_mode3.show()
 
 ```
+
+
+# CALTECH_101
+
+## Column {width=50%}
+
+### Row {.tabset}
+
+```{python}
+#| title: a Randombox of HCAM
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt1.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt = pickle.load(file)
+CALTECH_101_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 1
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt2.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt = pickle.load(file)
+CALTECH_101_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 2
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt3.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt = pickle.load(file)
+CALTECH_101_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 3
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt4.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt = pickle.load(file)
+CALTECH_101_hcam_plt.show()
+
+```
+## Column {width=50%}
+
+### Row {.tabset}
+
+```{python}
+#| title: Mode 1
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode1.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt_mode1 = pickle.load(file)
+CALTECH_101_hcam_plt_mode1.show()
+
+```
+
+```{python}
+#| title: Mode 1 + Mode 2
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode2.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt_mode2 = pickle.load(file)
+CALTECH_101_hcam_plt_mode2.show()
+
+```
+
+```{python}
+#| title: Mode 1 + Mode 2 + Mode 3
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_hcam_plt_mode3.pkl', 'rb') as file:
+    CALTECH_101_hcam_plt_mode3 = pickle.load(file)
+CALTECH_101_hcam_plt_mode3.show()
+
+
+```
+
+
 
 # Other Methods
 
 ## Row {.tabset}
 
 ```{python}
-#| title: Original pets Results of other Methods
+#| title: Original pets Results
 
 import pickle
 
-with open('fig_original_plt.pkl', 'rb') as file:
+with open('Fig/PETS/fig_original_plt.pkl', 'rb') as file:
     fig_original_plt = pickle.load(file)
 fig_original_plt.show()
 ```
 
 ```{python}
-#| title: Randombox pets Results of other Methods
+#| title: Randombox pets Results
 
 import pickle
 
-with open('fig_randombox_plt.pkl', 'rb') as file1:
+with open('Fig/PETS/fig_randombox_plt.pkl', 'rb') as file1:
     fig_randombox_plt = pickle.load(file1)
 fig_randombox_plt.show()
+```
+
+```{python}
+#| title: Original and Randombox Results
+
+import pickle
+
+with open('Fig/CALTECH_101/CALTECH_101_fig_plt.pkl', 'rb') as file1:
+    CALTECH_101_fig_randombox_plt = pickle.load(file1)
+CALTECH_101_fig_randombox_plt.show()
+
+with open('Fig/CALTECH_101/CALTECH_101_fig_randombox_plt.pkl', 'rb') as file1:
+    CALTECH_101_fig_randombox_plt = pickle.load(file1)
+CALTECH_101_fig_randombox_plt.show()
 ```
