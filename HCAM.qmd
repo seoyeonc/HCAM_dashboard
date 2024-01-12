@@ -277,6 +277,94 @@ CALTECH_101_hcam_plt_mode3.show()
 ```
 
 
+# PASCAL_2012
+
+## Column {width=50%}
+
+### Row {.tabset}
+
+```{python}
+#| title: a Randombox of HCAM
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt1.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt = pickle.load(file)
+PASCAL_2012_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 1
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt2.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt = pickle.load(file)
+PASCAL_2012_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 2
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt3.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt = pickle.load(file)
+PASCAL_2012_hcam_plt.show()
+
+```
+
+```{python}
+#| title: Mode 3
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt4.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt = pickle.load(file)
+PASCAL_2012_hcam_plt.show()
+
+```
+## Column {width=50%}
+
+### Row {.tabset}
+
+```{python}
+#| title: Mode 1
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt_mode1.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt_mode1 = pickle.load(file)
+PASCAL_2012_hcam_plt_mode1.show()
+
+```
+
+```{python}
+#| title: Mode 1 + Mode 2
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt_mode2.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt_mode2 = pickle.load(file)
+PASCAL_2012_hcam_plt_mode2.show()
+
+```
+
+```{python}
+#| title: Mode 1 + Mode 2 + Mode 3
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_random_hcam_plt_mode3.pkl', 'rb') as file:
+    PASCAL_2012_hcam_plt_mode3 = pickle.load(file)
+PASCAL_2012_hcam_plt_mode3.show()
+
+
+```
+
+
 
 # The results of Other Methods
 
@@ -314,4 +402,19 @@ CALTECH_101_fig_randombox_plt.show()
 with open('Fig/CALTECH_101/CALTECH_101_fig_randombox_plt.pkl', 'rb') as file1:
     CALTECH_101_fig_randombox_plt = pickle.load(file1)
 CALTECH_101_fig_randombox_plt.show()
+```
+
+
+```{python}
+#| title: PASCAL_2012
+
+import pickle
+
+with open('Fig/PASCAL_2012/PASCAL_2012_fig_plt.pkl', 'rb') as file1:
+    PASCAL_2012_fig_randombox_plt = pickle.load(file1)
+PASCAL_2012_fig_randombox_plt.show()
+
+with open('Fig/PASCAL_2012/PASCAL_2012_fig_randombox_plt.pkl', 'rb') as file1:
+    PASCAL_2012_fig_randombox_plt = pickle.load(file1)
+PASCAL_2012_fig_randombox_plt.show()
 ```
